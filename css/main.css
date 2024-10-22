@@ -1,0 +1,15 @@
+#paint_canva {
+  border: solid 2px black;
+}
+
+.colors_container {
+  display: flex;
+  gap: 10px;
+}
+
+.colors_picker {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
