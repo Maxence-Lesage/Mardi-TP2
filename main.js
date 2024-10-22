@@ -28,7 +28,7 @@ paint_canva.addEventListener("mousemove", (e) => {
 /*---------------------------------------------------------------*/
 /* COLOR PICKER */
 const colors_container = document.querySelector(".colors_container");
-const colors = [{ color: "black" }, { color: "green" }, { color: "red" }]
+const colors = [{ color: "black" }, { color: "green" }, { color: "red" }, { color: "yellow" }, { color: "lightgray" }, { color: "rebeccapurple" }, { color: "gold" }, { color: "blue" }, { color: "aquamarine" }, { color: "pink" }, { color: "brown" }]
 let paint_color = colors[0].color;
 
 for (let i = 0; i < colors.length; i++) {
