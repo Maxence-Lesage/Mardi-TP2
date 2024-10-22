@@ -21,8 +21,7 @@ paint_canva.addEventListener("mouseleave", (e) => {
 
 paint_canva.addEventListener("mousemove", (e) => {
   if (isPainting) {
-    const rect = paint_canva.getBoundingClientRect();
-    paint(e.clientX - rect.left, event.clientY - rect.top);
+    paint(e);
   }
 })
 
@@ -55,10 +54,22 @@ pencil_weight_slider.addEventListener("change", () => {
 /* CANVA PAINTING */
 
 const ctx = paint_canva.getContext("2d");
+let oldPosX, oldPosY = 0;
 
-function paint(x, y) {
+function paint(e) {
   ctx.fillStyle = paint_color;
-  ctx.fillRect(x, y, paint_weight, paint_weight);
+  ctx.beginPath();
+  ctx.arc(e.offsetX, e.offsetY, paint_weight, 0, 2 * Math.PI);
+  ctx.fill();
+  const midleX = e.offsetX - oldPosX;
+  const midleY = e.offsetY - oldPosY;
+  if (midleX <= 5 && midleX >= -5 && midleY <= 5 && midleY >= -5) {
+    ctx.beginPath();
+    ctx.arc(e.offsetX + midleX, e.offsetY + midleY, paint_weight / 1.7, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+  oldPosX = e.offsetX;
+  oldPosY = e.offsetY;
 }
 
 /*---------------------------------------------------------------*/
@@ -94,7 +105,6 @@ canva_download_btn.addEventListener("click", () => {
 function saveCanva() {
   const dataUrl = paint_canva.toDataURL();
   localStorage.setItem('canva', dataUrl);
-  console.log("CANVA SAVED");
 }
 
 function loadCanva() {
