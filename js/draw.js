@@ -1,3 +1,5 @@
+import listeners from "./listeners.js";
+
 export default class Draw {
   constructor(canva, strokeColor, strokeWidth) {
     this.canva = canva;
@@ -7,6 +9,8 @@ export default class Draw {
     this.ctx = canva.getContext("2d");
     this.lastPosX = null;
     this.lastPosY = null;
+    listeners(this);
+    this.loadSave();
   }
 
   paint(e) {

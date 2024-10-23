@@ -2,10 +2,11 @@ const elements = {
   weight_slider: document.querySelector("#pencil_weight_slider"),
   reset_btn: document.querySelector("#canva_reset_btn"),
   download_btn: document.querySelector("#canva_download_btn"),
-  colors_btn: document.querySelectorAll(".colors_container input")
+  colors_btn: document.querySelectorAll(".colors_container input"),
+  paint_canva: document.querySelector("#paint_canva")
 }
 
-export default function listeners(paint_canva, draw) {
+export default function listeners(draw) {
 
   /*-------------------------------------------------------*/
   /* LISTENERS FOR DRAWING TOOLS*/
@@ -32,23 +33,23 @@ export default function listeners(paint_canva, draw) {
   /*-------------------------------------------------------*/
   /* LISTENERS FOR DRAWING*/
 
-  paint_canva.addEventListener("mousedown", (e) => {
+  elements.paint_canva.addEventListener("mousedown", (e) => {
     draw.isPainting = true;
   })
 
-  paint_canva.addEventListener("mouseup", (e) => {
+  elements.paint_canva.addEventListener("mouseup", (e) => {
     draw.isPainting = false;
     draw.stopPaint();
     draw.save();
   })
 
-  paint_canva.addEventListener("mouseleave", (e) => {
+  elements.paint_canva.addEventListener("mouseleave", (e) => {
     draw.isPainting = false;
     draw.stopPaint();
     draw.save();
   })
 
-  paint_canva.addEventListener("mousemove", (e) => {
+  elements.paint_canva.addEventListener("mousemove", (e) => {
     if (draw.isPainting) {
       draw.paint(e);
     }
