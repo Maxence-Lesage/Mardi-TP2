@@ -11,11 +11,13 @@ paint_canva.addEventListener("mousedown", (e) => {
 
 paint_canva.addEventListener("mouseup", (e) => {
   isPainting = false;
+  stopPaint();
   saveCanva();
 })
 
 paint_canva.addEventListener("mouseleave", (e) => {
   isPainting = false;
+  stopPaint();
   saveCanva();
 })
 
@@ -54,22 +56,24 @@ pencil_weight_slider.addEventListener("change", () => {
 /* CANVA PAINTING */
 
 const ctx = paint_canva.getContext("2d");
-let oldPosX, oldPosY = 0;
+let oldPosX, oldPosY = null;
 
 function paint(e) {
-  ctx.fillStyle = paint_color;
   ctx.beginPath();
-  ctx.arc(e.offsetX, e.offsetY, paint_weight, 0, 2 * Math.PI);
-  ctx.fill();
-  const midleX = e.offsetX - oldPosX;
-  const midleY = e.offsetY - oldPosY;
-  if (midleX <= 5 && midleX >= -5 && midleY <= 5 && midleY >= -5) {
-    ctx.beginPath();
-    ctx.arc(e.offsetX + midleX, e.offsetY + midleY, paint_weight / 1.7, 0, 2 * Math.PI);
-    ctx.fill();
+  if (oldPosX && oldPosY) {
+    ctx.moveTo(oldPosX, oldPosY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineWidth = paint_weight;
+    ctx.strokeStyle = paint_color;
+    ctx.lineCap = "round";
+    ctx.stroke();
   }
   oldPosX = e.offsetX;
   oldPosY = e.offsetY;
+}
+
+function stopPaint() {
+  oldPosX, oldPosY = null;
 }
 
 /*---------------------------------------------------------------*/
