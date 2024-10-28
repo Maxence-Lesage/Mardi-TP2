@@ -1,5 +1,28 @@
+body {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0;
+  overflow: hidden;
+}
+
+.fixed {
+  height: 20vh;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*----------------------------------------------*/
+
 #paint_canva {
-  border: solid 2px black;
+  height: 80vh;
+  width: 100vw;
+  display: block;
+  border: 2px solid black;
 }
 
 .colors_container {
